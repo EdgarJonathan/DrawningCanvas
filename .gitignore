@@ -1,0 +1,4 @@
+#para ignorar los archivos 
+*.pro
+*.user
+
