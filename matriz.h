@@ -96,28 +96,32 @@ public:
     NodoCabeceraFila *getUp() const;
     void setUp(NodoCabeceraFila *value);
     NodoCabeceraFila *getDown() const;
+    void setDown(NodoCabeceraFila *value);
 };
 
 class NodoCabeceraCol
 {
 private:
     int col;
-public:
-    NodoCabeceraCol(NodoOrtogonal* nuevo);
     NodoCabeceraCol* right;
     NodoCabeceraCol* left;
+public:
+    NodoCabeceraCol(NodoOrtogonal* nuevo);
     CuerpoHorizontal* listVertical;
     int getCol() const;
     void setCol(int value);
+    NodoCabeceraCol *getRight() const;
+    void setRight(NodoCabeceraCol *value);
+    NodoCabeceraCol *getLeft() const;
+    void setLeft(NodoCabeceraCol *value);
 };
 
 //********************************************************************************
 //********************************************************************************
-//****************CLASE LISTA CABECERAS *******************************************
+//****************CLASE LISTA CABECERAS ******************************************
 //********************************************************************************
 //********************************************************************************
 //********************************************************************************
-
 class ListaCabeceraFila
 {
 private:
@@ -131,23 +135,57 @@ public:
 
     void add(NodoOrtogonal* nuevo);
 };
-
-
 class ListaCabecerCol
 {
 private:
 
     NodoCabeceraCol* search(int col);
-    void sort(NodoCabeceraFila* nuevo);
+    void sort(NodoCabeceraCol* nuevo);
 public:
     ListaCabecerCol();
     NodoCabeceraCol* first;
     NodoCabeceraCol* last;
+    void add(NodoOrtogonal* nuevo);
 };
 
+//********************************************************************************
+//********************************************************************************
+//*********************** Matriz *************************************************
+//********************************************************************************
+//********************************************************************************
+//********************************************************************************
 
+class matriz
+{
+private:
+    ListaCabecerCol* col;
+    ListaCabeceraFila* fila;
+public:
+    matriz();
+};
 
+/*
 
+class matriz
+{
 
+public:
 
+    matriz();
+    std::string dia;
+    ListaCabeceraFila* fila;
+    ListaCabeceraColumna* col;
+    std::string insertar(stOrtogonal datos,listCursos* cursos, listEdificios* edificios );
+    void graficar();
+    void generarDot(std::string nombre);
+    std::string txtCabeceraCol();
+    std::string txtCabeceraFila();
+
+    std::string txtFilas();
+    std::string txtColumnas();
+
+    std::string getDot();
+};
+
+*/
 #endif // MATRIZ_H
