@@ -466,6 +466,7 @@ void matriz::imprimirCol(){
 
 std::string matriz::txtCabeceraCol(){
 
+    std::string capa = "capa";
     std::string  result ="";
     std::string rank ="\t{ rank = same ;";
     std::string col ="";
@@ -485,7 +486,7 @@ std::string matriz::txtCabeceraCol(){
             //si ese ultimo nodo es igual al primero
             //osea solo existe un nodo en la matriz
             if(actual == columnaC->first){
-                result+="\tcapa -> nd"+col+";\n";
+                result+="\t"+capa+" -> nd"+col+";\n";
                 result+="\tnd"+col;
                 result+="[label =\"("+col+")\"];\n";
                 rank+="capa; nd"+col+";}\n";
@@ -504,7 +505,7 @@ std::string matriz::txtCabeceraCol(){
             //osea la lista tiene mas de un solo nodo
             if(actual==columnaC->first){
 
-                result+="\tcapa -> nd"+col+";\n";
+                result+="\t"+capa+" -> nd"+col+";\n";
 
                 result+="\tnd"+col;
                 result+="[label =\"("+col+")\"];\n";
@@ -543,12 +544,146 @@ std::string matriz::txtCabeceraCol(){
     return result;
 }
 std::string matriz::txtCabeceraFila(){
+
+    std::string fila = "";
+    std::string filaSig ="";
+    std::string capa = "capa";
     std::string  result ="";
+    NodoCabeceraFila* actual = filaC->first;
+
+    result+="\t//----------------------cabecera filas-----------------------\n";
+
+    while (actual) {
+
+        fila= std::to_string(actual->getFila());
+        // si el  es el ultimo nodo de la matriz
+        if(actual==filaC->last){
+
+            //si ese ultimo nodo es igual al primero
+            //osea solo existe un nodo en la matriz
+            if(actual == filaC->first){
+
+                result+="\t"+capa+" -> nd"+fila+";\n";
+                result+="\tnd"+fila;
+                result+="[label =\"("+fila+")\"];\n";
+
+            }else{
+                result+="\tnd"+fila;
+                result+="[label =\"("+fila+")\"];\n";
+            }
 
 
+        }else{
 
+            filaSig = std::to_string(actual->getDown()->getFila());
+
+            //el nodo actual es igual al primero
+            //osea la lista tiene mas de un solo nodo
+            if(actual==filaC->first){
+
+                result+="\t"+capa+" -> nd"+fila+"\n";
+
+                result+="\tnd"+fila;
+                result+="[label =\"("+fila+")\"];\n";
+
+                result+="\tnd"+fila;
+                result+=" -> ";
+                result+= "nd"+filaSig;
+                result+=" -> ";
+                result+="nd"+fila+"[constraint=true];\n";
+
+            }else{
+                result+="\tnd"+fila;
+                result+="[label =\"("+fila+")\"];\n";
+
+                result+="\tnd"+fila;
+                result+=" -> ";
+                result+= "nd"+filaSig;
+                result+=" -> ";
+                result+="nd"+fila+"[constraint=true];\n";
+            }
+
+        }
+
+
+        actual = actual->getDown();
+    }
 
     return result;
+
+/*  std::string result="\n\n";
+    std::string edificio="";
+    std::string edificiosig="";
+    std::string no_salon ="";
+    std::string no_salonsig="";
+    std::string edificioClean ="";
+    std::string edificioCleanSig ="";
+
+    NodoCabeceraFila* actual = fila->primero;
+
+    result+="\t//----------------------cabecera filas-----------------------\n";
+    while(actual != nullptr){
+
+        edificioClean =actual->edificio->getValor();
+        edificio = dia+csv::ReplaceAll(edificioClean,"-","") ;
+        no_salon = std::to_string(actual->salon->getValor().no_salon);
+
+        if(actual->abajo==nullptr){
+
+            if(actual==fila->primero){
+
+                result+="\t"+dia+" -> nd"+edificio+no_salon+"[constraint=true];\n";
+                result+="\tnd"+edificio+no_salon;
+                result+="[label =\""+edificioClean+"\\n"+no_salon+"\"];\n";
+
+
+            }else{
+
+                result+="\tnd"+edificio+no_salon;
+                result+="[label =\""+edificioClean+"\\n"+no_salon+"\"];\n";
+
+            }
+
+        }else{
+            edificioCleanSig = actual->abajo->edificio->getValor();
+            edificiosig =dia+csv::ReplaceAll(edificioCleanSig,"-","") ;
+            no_salonsig = std::to_string(actual->abajo->salon->getValor().no_salon);
+
+            if(actual==fila->primero){
+
+                result+="\t"+dia+" -> nd"+edificio+no_salon+"[constraint=true];\n";
+
+                result+="\tnd"+edificio+no_salon;
+                result+="[label =\""+edificioClean+"\\n"+no_salon+"\"];\n";
+
+                result+="\t nd"+edificio+no_salon;
+                result+=" -> ";
+                result+= "nd"+edificiosig+no_salonsig;
+                result+=" -> ";
+                result+="nd"+edificio+no_salon+"[constraint=true];\n";
+
+            }else{
+
+                result+="\tnd"+edificio+no_salon;
+                result+="[label =\""+edificioClean+"\\n"+no_salon+"\"];\n";
+
+                result+="\t nd"+edificio+no_salon;
+                result+=" -> ";
+                result+= "nd"+edificiosig+no_salonsig;
+                result+=" -> ";
+                result+="nd"+edificio+no_salon+"[constraint=true];\n";
+
+            }
+
+        }
+
+        actual =actual->abajo;
+    }
+
+
+
+    return result;*/
+
 }
 std::string matriz::txtFilas(){
     std::string  result ="";

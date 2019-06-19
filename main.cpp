@@ -22,6 +22,7 @@ int main()
     std::cout<<"\n"<<std::endl;
 
     std::cout<<mimatriz->txtCabeceraCol()<<std::endl;
+    std::cout<<mimatriz->txtCabeceraFila()<<std::endl;
 
 
 
