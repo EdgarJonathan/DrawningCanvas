@@ -1,6 +1,7 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
+#include <iostream>
 #include<string>
 
 //********************************************************************************
@@ -20,7 +21,6 @@ private:
     NodoOrtogonal * down;
     NodoOrtogonal * right;
     NodoOrtogonal * left;
-
     std::string color;
 
 public:
@@ -90,7 +90,7 @@ private:
 
 public:
     NodoCabeceraFila(NodoOrtogonal* nuevo);
-    CuerpoVertical* listHorizontal;
+    CuerpoHorizontal* listHorizontal;
     int getFila() const;
     void setFila(int value);
     NodoCabeceraFila *getUp() const;
@@ -107,7 +107,7 @@ private:
     NodoCabeceraCol* left;
 public:
     NodoCabeceraCol(NodoOrtogonal* nuevo);
-    CuerpoHorizontal* listVertical;
+    CuerpoVertical* listVertical;
     int getCol() const;
     void setCol(int value);
     NodoCabeceraCol *getRight() const;
@@ -158,34 +158,26 @@ public:
 class matriz
 {
 private:
-    ListaCabecerCol* col;
-    ListaCabeceraFila* fila;
-public:
-    matriz();
-};
 
-/*
-
-class matriz
-{
 
 public:
-
+    ListaCabecerCol* columnaC;
+    ListaCabeceraFila* filaC;
     matriz();
-    std::string dia;
-    ListaCabeceraFila* fila;
-    ListaCabeceraColumna* col;
-    std::string insertar(stOrtogonal datos,listCursos* cursos, listEdificios* edificios );
-    void graficar();
-    void generarDot(std::string nombre);
+    void add(int fila, int columna, std::string color );
+
+    void imprimirfIla();
+    void imprimirCol();
+
     std::string txtCabeceraCol();
     std::string txtCabeceraFila();
-
     std::string txtFilas();
     std::string txtColumnas();
 
-    std::string getDot();
 };
 
-*/
+
+
+
+
 #endif // MATRIZ_H
