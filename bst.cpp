@@ -204,7 +204,11 @@ void bst::textoDot(std::string nombre)
 
 }
 
-
+std::string bst::obtenerdotGrafica(){
+    txtgrafica="";
+    graficarPreorden();
+    return txtgrafica;
+}
 
 
 

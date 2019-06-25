@@ -1,5 +1,7 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
+
+
 #include <fstream>
 #include <iostream>
 #include<string>
@@ -186,16 +188,22 @@ private:
     void generarDot(std::string nombre);
     std::string txtFilas();
     std::string txtColumnas();
+    void generarDotAplicacion(std::string nombre);
+    std::string txtTablaHtml();
+    std::string getColor(int fila, int col);
+
+
 
 public:
     ListaCabecerCol* columnaC;
     ListaCabeceraFila* filaC;
     matriz();
     void add(int fila, int columna, std::string color );
-
     void imprimirfIla();
     void imprimirCol();
     void graficar();
+
+    void graficarCapaAplicacion();
 
 
 

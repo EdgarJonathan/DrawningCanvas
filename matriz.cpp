@@ -573,6 +573,80 @@ void matriz::graficar(){
 
 }
 
+void matriz::graficarCapaAplicacion(){
+
+    std::string nombre = "matrizAplicacion";
+    generarDotAplicacion(nombre);
+
+    //especificar el nomabre en los metodos system
+    system("dot -Tsvg -O matrizAplicacion.dot");
+    system("xdg-open matrizAplicacion.dot.svg");
+
+}
+
+void matriz::generarDotAplicacion(std::string nombre){
+
+    std::ofstream archivo;
+    archivo.open(nombre+".dot",std::ios::out);//abriendo el archivo
+    if(archivo.fail()){ std::cout<<"No se pudo crear el archivo"; exit(1);}
+
+    archivo<<"digraph Aplicacion "<<std::endl;
+    archivo<<"{\n"<<std::endl;
+    archivo<<"\ttabla[\n"<<std::endl;
+    archivo<<"\t\tshape=plaintext\n"<<std::endl;
+    archivo<<"\t\tlabel=<\n"<<std::endl;
+    archivo<<"\t\t<table border='0' cellborder='0'  cellspacing='0' color='black' >\n"<<std::endl;
+
+    archivo<<txtTablaHtml()<<std::endl;
+
+
+    archivo<<"\t\t</table>\n"<<std::endl;
+    archivo<<"\t>];\n"<<std::endl;
+    archivo<<"}"<<std::endl;
+    archivo.close();//cerrar el archivo
+
+}
+
+
+std::string matriz::txtTablaHtml(){
+
+    std::string result="";
+    std::string color ="";
+    int sizeFila = filaC->last->getFila()+1;
+    int sizeCol  = columnaC->last->getCol()+1;
+
+    for (int i = 0; i<sizeFila;i++){
+
+        result+="\t\t\t<tr>\n";
+        for (int j=0;j<sizeCol;j++) {
+
+            color =getColor(i,j);
+
+            result+="\t\t\t\t<td width=\"50\" height=\"50\" bgcolor=\""+color+"\"></td>\n";
+        }
+        result+="\t\t\t</tr>\n";
+
+    }
+
+    return result;
+}
+
+std::string matriz::getColor(int fila, int col){
+
+    NodoCabeceraFila* actualFila = filaC->first;
+    while (actualFila) {
+        NodoOrtogonal* actualCol = actualFila->listHorizontal->first;
+        while (actualCol) {
+            if((fila==actualFila->getFila())&&(col==actualCol->getCol()))
+                return actualCol->getColor();
+
+            actualCol= actualCol->getRight();
+        }
+        actualFila = actualFila->getDown();
+    }
+    return "#FFFFFF";
+}
+
 void matriz::generarDot(std::string nombre){
 
     std::ofstream archivo;
@@ -682,15 +756,8 @@ std::string matriz::txtColumnas(){
                 result+="\tcol"+accol+" -> nd"+acfila+accol+";\n\n";
 
             }
-
-
-
             actualFila = actualFila->getDown();
         }
-
-
-
-
         col++;
         actualCol = actualCol->getRight();
     }

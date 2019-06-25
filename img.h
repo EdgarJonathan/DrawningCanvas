@@ -35,6 +35,10 @@ class ListCapas
 {
 private:
     capa* first;
+    capa* last;
+
+    bool search(int id);
+
 public:
     ListCapas();
     void add(int id, bst* arbol);
@@ -59,6 +63,7 @@ private:
 
 public:
     img(ListCapas* list,int idImg);
+    img();
     img *getSig() const;
     void setSig(img *value);
     img *getAnt() const;
@@ -81,17 +86,63 @@ class listImg
 {
 
 private:
+    std::string  dotEnlacesListaArbol;
     img* first;
     img* last;
     void textoDot(std::string nombre);
+
+    std::string getDotImagen(int id);
     std::string getDot();
+    std::string subGrafoArbol(std::string dotArbol);
+    std::string subGrafoLista(int id);
+    void graficarImagen(int id,std::string dotArbol,std::string nombre);
+    bool search(int idImg);
+
+    img* searchImg(int id,listImg* listaImagenes);
+
 
 public:
     listImg();
-    void add(ListCapas* listCapa, int idimg);
+    void add(img* &listCapa, int idimg);
     void graficar();
-
+    void graficarImagen(int id,std::string dotArbol);
+    void imprimir();
+    img* getImg(int id);
+    void addImgUsuario(int id, listImg *listaImganes);
 };
+
+
+//********************************************************************************
+//********************************************************************************
+//*********************** NodoimgUser *******************************************
+//********************************************************************************
+//********************************************************************************
+//********************************************************************************
+
+class NodoImgUser
+{
+private:
+    NodoImgUser *sig;
+    int idImg;
+    img* imagen;
+
+public:
+    NodoImgUser(img* imagen, int idImg);
+    int getIdImg() const;
+    void setIdImg(int value);
+    img *getImagen() const;
+    void setImagen(img *value);
+};
+
+
+//********************************************************************************
+//********************************************************************************
+//*********************** ListImgUser ********************************************
+//********************************************************************************
+//********************************************************************************
+//********************************************************************************
+
+
 
 
 #endif // IMG_H
