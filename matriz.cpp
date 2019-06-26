@@ -151,6 +151,8 @@ void CuerpoHorizontal::sort(NodoOrtogonal *nuevo){
                 break;
             }
 
+            actual = actual->getRight();
+
         }
 
     }

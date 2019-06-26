@@ -149,6 +149,22 @@ void img::setSig(img *value)
     sig = value;
 }
 
+bool img::search(int idCapa){
+
+    capa* actual = listCapa->getFirst();
+
+    while (actual) {
+
+        if(actual->getCapa()->id == idCapa){
+            return true;
+        }
+
+        actual = actual->getSig();
+    }
+    return false;
+
+}
+
 
 //********************************************************************************
 //********************************************************************************
@@ -313,12 +329,14 @@ std::string listImg::getDotImagen(int id){
 
         capa* actualCapa = imagen->getListCapa()->getFirst();
         while (actualCapa) {
+
             node = "node"+std::to_string(actualCapa->getCapa()->id);
             scont=std::to_string(cont);
             capalabel = "capa"+std::to_string(actualCapa->getCapa()->id);
             Capa= imglabel+capalabel+scont;
 
             result+="\t\t\t"+imglabel+"[label=\""+imglabel+"\"];\n";
+
             // si no es el ultimo nodo
             if(actualCapa->getSig()){
                 sconts=std::to_string(cont+1);
@@ -390,6 +408,7 @@ std::string listImg::getDot(){
 
     do {
 
+
         contCapa=0;
         imgActual = "imagen"+std::to_string(actualImg->getId());
 
@@ -418,12 +437,12 @@ std::string listImg::getDot(){
 
             scontCapa = std::to_string(contCapa);
             capaActual ="capa"+std::to_string(actualCapa->getCapa()->id);
-            nodecapaActual =imgActual+capaActual+scontCapa;
+            nodecapaActual =imgActual+scontCapa+capaActual;
 
             // si no es la ultima capa de la lista
             if(actualCapa->getSig()){
                 scontCapaSig = std::to_string(contCapa+1);
-                nodecapaSig =imgActual+"capa"+std::to_string(actualCapa->getSig()->getCapa()->id)+scontCapaSig;
+                nodecapaSig =imgActual+scontCapaSig+"capa"+std::to_string(actualCapa->getSig()->getCapa()->id);
                 //si es una capa intermedia de la lista
                 if(actualCapa != actualImg->getListCapa()->getFirst()){
 
@@ -556,6 +575,16 @@ void listImg::graficarImagen(int id,std::string dotArbol,std::string nombre){
 //********************************************************************************
 //********************************************************************************
 //********************************************************************************
+NodoImgUser *NodoImgUser::getSig() const
+{
+    return sig;
+}
+
+void NodoImgUser::setSig(NodoImgUser *value)
+{
+    sig = value;
+}
+
 NodoImgUser::NodoImgUser(img* imagen, int idImg){
 
     sig =nullptr;
@@ -593,6 +622,55 @@ void NodoImgUser::setIdImg(int value)
 //********************************************************************************
 //********************************************************************************
 //********************************************************************************
+ListImgUser::ListImgUser(){
+
+    last=first=nullptr;
+
+}
+
+
+void ListImgUser::add(int id, listImg *listaImganes){
+
+   img* nuevoImg = listaImganes->getImg(id);
+   if(nuevoImg){
+          NodoImgUser* nuevo = new NodoImgUser(nuevoImg,id);
+
+          if(first){
+              last->setSig(nuevo);
+              last = nuevo;
+          }else {
+              first = last = nuevo;
+           }
+   }
+
+}
+
+std::string ListImgUser::getDot(std::string ndArbol){
+
+    std::string result="";
+
+
+
+    return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

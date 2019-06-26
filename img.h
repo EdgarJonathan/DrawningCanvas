@@ -70,7 +70,7 @@ public:
     void setAnt(img *value);
     int getId() const;
     void setId(int value);
-
+    bool search(int idCapa);
 
     ListCapas *getListCapa() const;
     void setListCapa(ListCapas *value);
@@ -96,13 +96,14 @@ private:
     std::string subGrafoArbol(std::string dotArbol);
     std::string subGrafoLista(int id);
     void graficarImagen(int id,std::string dotArbol,std::string nombre);
-    bool search(int idImg);
 
     img* searchImg(int id,listImg* listaImagenes);
 
 
 public:
     listImg();
+    bool search(int idImg);
+
     void add(img* &listCapa, int idimg);
     void graficar();
     void graficarImagen(int id,std::string dotArbol);
@@ -132,6 +133,8 @@ public:
     void setIdImg(int value);
     img *getImagen() const;
     void setImagen(img *value);
+    NodoImgUser *getSig() const;
+    void setSig(NodoImgUser *value);
 };
 
 
@@ -143,6 +146,19 @@ public:
 //********************************************************************************
 
 
+class ListImgUser
+{
 
+private:
+
+public:
+    NodoImgUser*first;
+    NodoImgUser*last;
+    ListImgUser();
+    void add(int id, listImg *listaImganes);
+    std::string getDot(std::string ndArbol);
+
+
+};
 
 #endif // IMG_H

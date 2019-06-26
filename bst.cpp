@@ -133,6 +133,18 @@ NodoBst* bst::buscar(int id, NodoBst *raiz){
 
 
 
+void bst::graficarPreordenEspejo(){
+
+    txtgrafica="";
+    if(this->raiz)
+    {
+        graficarPreordenEspejo(this->raiz);
+    }else {
+        txtgrafica = "node20[label = \"<f0> | <f1> Arbol Vacio | <f2>\"]";
+    }
+
+}
+
 
 
 void bst::graficarPreorden()
@@ -145,6 +157,36 @@ void bst::graficarPreorden()
         txtgrafica = "node20[label = \"<f0> | <f1> Arbol Vacio | <f2>\"]";
     }
 }
+
+
+void bst::graficarPreordenEspejo(NodoBst *raiz){
+
+    if(raiz)
+    {
+        id= std::to_string(raiz->id);
+        txtgrafica +="\t\t\tnode"+id+"[label =\"<f0> | <f1> capa: "+id+" | <f2>\"]\n";
+
+        graficarPreorden(raiz->der);
+        if(raiz->der)
+        {
+            id= std::to_string(raiz->id);
+            idDer = std::to_string(raiz->der->id);
+            txtgrafica += "\t\t\t\"node"+id+"\":f0-> \"node"+idDer+"\":f1\n\n";
+        }
+
+        graficarPreorden(raiz->izq);
+        if(raiz->izq)
+        {
+            id= std::to_string(raiz->id);
+            idIzq=std::to_string(raiz->izq->id);
+            txtgrafica += "\t\t\t\"node"+id+"\":f2-> \"node"+idIzq+"\":f1\n\n";
+        }
+
+
+    }
+
+}
+
 
 void bst::graficarPreorden(NodoBst* raiz)
 {
@@ -173,15 +215,54 @@ void bst::graficarPreorden(NodoBst* raiz)
 }
 
 
+void bst::graficarEspejo(){
+
+
+    txtgrafica="";
+
+    std::string nombre = "arbolBstEspejo";
+    textoDotEspejo(nombre);
+
+    //especificar el nomabre en los metodos system
+    system("dot -Tpng -O arbolBstEspejo.dot");
+    system("xdg-open arbolBstEspejo.dot.png");
+
+}
 
 void bst::graficar()
 {
+
+    txtgrafica="";
+
     std::string nombre = "arbolBst";
     textoDot(nombre);
 
     //especificar el nomabre en los metodos system
     system("dot -Tpng -O arbolBst.dot");
     system("xdg-open arbolBst.dot.png");
+
+
+}
+
+
+void bst::textoDotEspejo(std::string nombre){
+
+    std::ofstream archivo;
+    archivo.open(nombre+".dot",std::ios::out);//abriendo el archivo
+    if(archivo.fail()){ std::cout<<"No se pudo crear el archivo"; exit(1);}
+
+    archivo<<"digraph g "<<std::endl;
+    archivo<<"{\n"<<std::endl;
+    archivo<<"node[shape=record, height=.1, color=turquoise4, fillcolor=green,style=filled ];"<<std::endl;
+    archivo<<"edge[color=tomato];"<<std::endl;
+
+    graficarPreordenEspejo();
+    archivo<<txtgrafica<<std::endl;
+
+    archivo<<"}"<<std::endl;
+
+    archivo.close();//cerrar el archivo
+
 }
 
 void bst::textoDot(std::string nombre)
@@ -203,6 +284,8 @@ void bst::textoDot(std::string nombre)
     archivo.close();//cerrar el archivo
 
 }
+
+
 
 std::string bst::obtenerdotGrafica(){
     txtgrafica="";

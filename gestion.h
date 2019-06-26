@@ -53,10 +53,10 @@ private:
     bst* arbolCapas;
     listImg* listaImganes;
     Avl* arbolUsuarios;
-    matriz* auxCapa;
-    ListCapas* Listacapa = new ListCapas();
-    img* auxImg;
 
+    //--para graficar por recorrido limitadod
+    int contcapas;
+    matriz* auxCapa;
 
     //---booleanas
     bool capasCargadas;
@@ -96,6 +96,16 @@ private:
 
     //---graficas
     matriz* generarImagen(img* imagen);
+    matriz* generarImagen(matriz* capa1,matriz* capa0);
+
+    void adminRecorridoLimitado(int tipo);
+
+    void generarImgpostorden(img* imagen, NodoBst* raiz);
+    void generarImginorden(img* imagen, NodoBst* raiz);
+    void generarImgpreorden(img* imagen, NodoBst* raiz);
+
+
+
 
 public:
     Gestion();

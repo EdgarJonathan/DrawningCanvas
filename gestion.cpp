@@ -11,6 +11,9 @@ Gestion::Gestion()
     imagenesCargadas = false;
     imagenesCargadas = false;
 
+    auxCapa = new matriz();
+    contcapas =0;
+
 }
 
 //-----------------Validar Entrada
@@ -69,6 +72,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema+=letra;
                 estado = 1;
             }else {
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un numero entero"<<std::endl;
                 estado  = 11;
             }
@@ -82,6 +94,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema="";
                 estado = 2;
             }else{
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un numero entero"<<std::endl;
                 estado  = 11;
             }
@@ -91,6 +112,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema+=letra;
                 estado=3;
             }else {
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un numero entero"<<std::endl;
                 estado  = 11;
             }
@@ -105,6 +135,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema="";
                 estado = 4;
             }else{
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un numero entero"<<std::endl;
                 estado  = 11;
             }
@@ -114,6 +153,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema+=letra;
                 estado=5;
             }else {
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un numero entero"<<std::endl;
                 estado  = 11;
             }
@@ -127,6 +175,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema="";
                 estado =6;
             }else{
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un numero entero"<<std::endl;
                 estado  = 11;
             }
@@ -136,6 +193,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema+=letra;
                 estado =7;
             }else{
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un '#' "<<std::endl;
                 estado  = 11;
             }
@@ -146,6 +212,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema+=letra;
                 estado =8;
             }else {
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un caracter alfanumerico "<<std::endl;
                 estado  = 11;
             }
@@ -159,6 +234,15 @@ void Gestion::crearCapas(std::string txt){
                 lexema="";
                 estado =9;
             }else {
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"  ant  "<<prueva<<std::endl;
                 std::cout<<"se esperaba un caracter alfanumerico o una ';' "<<std::endl;
                 estado  = 11;
             }
@@ -173,7 +257,16 @@ void Gestion::crearCapas(std::string txt){
                 arbolCapas->add(idCapa, capa);
                 estado=0;
             }else{
-                std::cout<<"se esperaba un '}' "<<std::endl;
+
+                unsigned int lol =20;
+                std::string prueva="";
+                while (lol) {
+
+                    prueva+=txt[i-lol];
+                    lol--;
+                }
+
+                std::cout<<"se esperaba un '}' ant  "<<prueva<<std::endl;
                 estado  = 11;
             }
             break;
@@ -199,6 +292,10 @@ void Gestion::crearImagenes(std::string txt){
     //--componentes
     int idImg =0;
     int idCapa =0;
+    ListCapas* Listacapa = new ListCapas() ;
+    img* auxImg;
+
+
 
 
     for(unsigned int i=0 ; i<txt.size();i++){
@@ -229,7 +326,7 @@ void Gestion::crearImagenes(std::string txt){
                 estado  = 4;
             }
 
-             break;
+            break;
         case 2:
             if(esNumero(letra)){
                 lexema+=letra;
@@ -243,6 +340,7 @@ void Gestion::crearImagenes(std::string txt){
             if(esNumero(letra)){
                 lexema+=letra;
                 estado=3;
+
             }else if(letra==','){
                 idCapa = std::atoi(lexema.c_str());
                 Listacapa->add(idCapa,arbolCapas);
@@ -286,15 +384,11 @@ void Gestion::crearUsuarios(std::string txt){
     //--componentes
     std::string user="";
     int idimg=0;
-    listImg* auxList = new listImg();
+    ListImgUser* auxList = new ListImgUser();
 
     for(unsigned int i=0 ; i<txt.size();i++){
 
         char letra =txt[i];
-        if(i==(44)){
-
-            std::cout<<"letra "<<letra<<std::endl;
-        }
 
         switch (estado) {
         case 0:
@@ -328,13 +422,13 @@ void Gestion::crearUsuarios(std::string txt){
             }else if(letra==','){
 
                 idimg = std::atoi(lexema.c_str());
-                auxList->addImgUsuario(idimg,listaImganes);
+                auxList->add(idimg,listaImganes);
                 lexema="";
                 estado =3;
             }else if(letra==';'){
                 arbolUsuarios->insertarAvl(auxList,user);
                 lexema="";
-                auxList = new listImg();
+                auxList = new ListImgUser();
                 estado =0;
 
             }else{
@@ -450,7 +544,6 @@ void Gestion::init(){
     int choice =0;
     do
     {
-         listaImganes->imprimir();
 
         std::cout << std::endl
                   << "**********************************\n"
@@ -479,7 +572,6 @@ void Gestion::init(){
             ABC();
             break;
         case 4:
-            listaImganes->imprimir();
             estadoMemoria();
             break;
         case 5:
@@ -516,8 +608,8 @@ void Gestion::cargaMasiva(){
                       << "**********************************\n";
             std::cin >> entrada;
 
-            //leer(entrada,CAPAS);
-            leer("/home/jonathan/Escritorio/proyecto1/entrada/alex/MarioBros2.txt",CAPAS);
+            leer(entrada,CAPAS);
+//            leer("/home/jonathan/Escritorio/proyecto1/entrada/alex/MarioBros2.txt",CAPAS);
         }
 
 
@@ -535,14 +627,10 @@ void Gestion::cargaMasiva(){
                       << "**********************************\n";
             std::cin >> entrada;
 
-            //leer(entrada,IMAGENES);
-            leer("/home/jonathan/Escritorio/proyecto1/entrada/alex/ListaIMG.txt",IMAGENES);
+                        leer(entrada,IMAGENES);
+//            leer("/home/jonathan/Escritorio/proyecto1/entrada/alex/ListaIMG.txt",IMAGENES);
 
-            listaImganes->imprimir();
         }
-
-        listaImganes->imprimir();
-
 
         while (!usuariosCargados)
         {
@@ -558,9 +646,8 @@ void Gestion::cargaMasiva(){
                       << "**********************************\n";
             std::cin >> entrada;
 
-            //leer(entrada,USUARIOS);
-            leer("/home/jonathan/Escritorio/proyecto1/entrada/alex/ListaUSR.txt",USUARIOS);
-             listaImganes->imprimir();
+                        leer(entrada,USUARIOS);
+//            leer("/home/jonathan/Escritorio/proyecto1/entrada/alex/ListaUSR.txt",USUARIOS);
 
         }
 
@@ -681,7 +768,6 @@ void Gestion::estadoMemoria(){
         switch (choice)
         {
         case 1:
-            listaImganes->imprimir();
             verLIstaImagenes();
             break;
         case 2:
@@ -783,6 +869,39 @@ void Gestion::otrosReportes(){
 
 void Gestion::recorridoLimitado(){
 
+
+    int choice =0;
+    do
+    {
+
+        std::cout << std::endl
+                  << "**********************************\n"
+                  << " 1 - Inorden.\n"
+                  << " 2 - Postorden.\n"
+                  << " 3 - Preorden.\n"
+                  << " 4 - regresar.\n"
+                  << " elige una opcion y presiona enter: \n"
+                  << "**********************************\n";
+        std::cin >> entrada;
+
+        choice = validarEntrada(entrada);
+        limpiar();
+
+
+        if((choice!=-1)&&(choice!=4)){
+            if((choice==1)||(choice==2)||(choice==3)){
+                adminRecorridoLimitado(choice);
+            }
+
+        }else {
+            std::cout << "opcion No valida. \n"
+                      << "Vuelva a elegir una opcion.\n";
+        }
+
+    }while (choice !=4);
+
+
+
 }
 void Gestion::listadeImagenes(){
 
@@ -804,7 +923,7 @@ void Gestion::listadeImagenes(){
             matriz* auxMatriz = generarImagen(aux);
 
             if(auxMatriz){
-                auxMatriz->graficarCapaAplicacion();
+                auxMatriz->graficar();
             }
 
         }
@@ -830,35 +949,86 @@ void Gestion::imagenPorCapa(){
         NodoBst* aux = arbolCapas->buscar(choice);
         if(aux){
             aux->capa->graficarCapaAplicacion();
+            aux->capa->graficar();
         }
     }while (choice == -1);
 }
-
-
-
 void Gestion::imagenPorUsuario(){}
 
-//--3.2
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//------------------------------------3.2----------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 void Gestion::Usuarios(){}
 void Gestion::Imagenes(){}
-
-//--3.3
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//------------------------------------3.3----------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 void Gestion::verLIstaImagenes(){
-//    listaImganes->imprimir();
-  // listaImganes->graficar();
-   listaImganes->imprimir();
+
+    listaImganes->graficar();
+
 }
 void Gestion::verArbolCapas(){
     arbolCapas->graficar();
 }
-void Gestion::verArbolCapasEspejo(){}
-void Gestion::verCapa(){}
-void Gestion::verImagenyArbolCapas(){}
+void Gestion::verArbolCapasEspejo(){
+    arbolCapas->graficarEspejo();
+}
+void Gestion::verCapa(){
+
+    int choice =0;
+    do
+    {
+        std::cout << std::endl
+                  << "**********************************\n"
+                  << " - Ingresar Id de capa a gaficar.\n"
+                  << "**********************************\n";
+        std::cin >> entrada;
+
+        choice = validarEntrada(entrada);
+        limpiar();
+
+        NodoBst* aux = arbolCapas->buscar(choice);
+        if(aux){
+            aux->capa->graficar();
+        }
+    }while (choice == -1);
+
+
+}
+void Gestion::verImagenyArbolCapas(){
+
+    int choice =0;
+    do
+    {
+        std::cout << std::endl
+                  << "***************************************\n"
+                  << " - Ingresar id de la imagen a graficar.\n"
+                  << " 1 regresar                            \n"
+                  << "***************************************\n";
+        std::cin >> entrada;
+
+        choice = validarEntrada(entrada);
+        limpiar();
+
+        listaImganes->graficarImagen(choice,arbolCapas->obtenerdotGrafica());
+
+    }while ((choice == -1)||(choice!=2));
+
+}
 void Gestion::verArboldeUsuarios(){
     arbolUsuarios->graficar();
 }
 
-//--3.4
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//------------------------------------3.4----------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 void Gestion::top5imagenes(){}
 void Gestion::todasLasCapasHojas(){}
 void Gestion::profundidadArbolCapas(){}
@@ -867,8 +1037,164 @@ void Gestion::listarCapas(){}
 void Gestion::top5usuarios(){}
 void Gestion::arbolEspejoUsuarios(){}
 void Gestion::ListarUsuariosEnRecorrido(){}
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//----------------------------procesamiento----------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 
-//----------------imagenes
+void Gestion::adminRecorridoLimitado(int tipo){
+
+
+    int idImg =0;
+    do
+    {
+
+        std::cout << std::endl
+                  << "*****************************************\n"
+                  << "  - Ingrese  id de la imagen a utilizar .\n"
+                  << "*****************************************\n";
+        std::cin >> entrada;
+
+        idImg = validarEntrada(entrada);
+        limpiar();
+
+        if(idImg ==-1){
+            std::cout << "opcion No valida. \n"
+                      << "Vuelva a elegir una opcion.\n";
+
+        }
+
+    }while (idImg ==-1);
+
+
+    int choice1 =0;
+    do
+    {
+
+        std::cout << std::endl
+                  << "******************************************\n"
+                  << "  - ingrese el numero de capas a graficar .\n"
+                  << "******************************************\n";
+        std::cin >> entrada;
+
+        choice1 = validarEntrada(entrada);
+        limpiar();
+
+        if(choice1 ==-1){
+            std::cout << "opcion No valida. \n"
+                      << "Vuelva a elegir una opcion.\n";
+
+        }
+
+
+    }while (idImg ==-1);
+
+    contcapas = choice1;
+    auxCapa = nullptr;
+
+
+    //    << " 1 - Inorden.\n"
+    //    << " 2 - Postorden.\n"
+    //    << " 3 - Preorden.\n"
+    //    << " 4 - regresar.\n"
+
+
+    switch (tipo) {
+    case  1:
+        generarImginorden(listaImganes->getImg(idImg),arbolCapas->raiz);
+        // auxCapa->graficar();
+        auxCapa->graficarCapaAplicacion();
+        break;
+    case  2:
+        generarImgpostorden(listaImganes->getImg(idImg),arbolCapas->raiz);
+        // auxCapa->graficar();
+        auxCapa->graficarCapaAplicacion();
+        break;
+    case  3:
+        generarImgpreorden(listaImganes->getImg(idImg),arbolCapas->raiz);
+        //  auxCapa->graficar();
+        auxCapa->graficarCapaAplicacion();
+        break;
+    default:
+        std::cout <<"El metodo para graficar no se eligio correctamente"<<std::endl;
+        break;
+
+    }
+
+
+
+
+
+}
+
+void Gestion::generarImginorden(img* imagen, NodoBst* raiz){
+
+    if(raiz&&contcapas){
+
+        generarImginorden(imagen,raiz->izq);
+
+        if(imagen->search(raiz->id)){
+            auxCapa = generarImagen(raiz->capa,auxCapa);
+            --contcapas;
+        }
+        generarImginorden(imagen,raiz->der);
+
+    }else {
+
+    }
+
+}
+
+void  Gestion::generarImgpreorden(img *imagen, NodoBst *raiz){
+
+    if(raiz&&contcapas){
+
+        if(imagen->search(raiz->id)){
+            auxCapa = generarImagen(raiz->capa,auxCapa);
+            --contcapas;
+        }
+
+        generarImgpreorden(imagen,raiz->izq);
+        generarImgpreorden(imagen,raiz->der);
+
+    }else {
+
+
+    }
+
+
+}
+
+void Gestion::generarImgpostorden(img *imagen, NodoBst *raiz){
+
+    if(raiz&&contcapas){
+
+        generarImgpostorden(imagen,raiz->izq);
+
+        generarImgpostorden(imagen,raiz->der);
+
+
+        if(imagen->search(raiz->id)){
+            auxCapa = generarImagen(raiz->capa,auxCapa);
+            --contcapas;
+        }
+
+    }else {
+
+
+    }
+
+
+
+}
+
+
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//----------------metodos Complementarios----------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 matriz* Gestion::generarImagen(img* imagen){
 
     matriz* result = new matriz();
@@ -882,9 +1208,11 @@ matriz* Gestion::generarImagen(img* imagen){
 
         NodoCabeceraFila* actualFila =capaActual->getCapa()->capa->filaC->first;
 
+
         while (actualFila) {
 
             NodoOrtogonal* actualCol = actualFila->listHorizontal->first;
+
 
             while (actualCol) {
 
@@ -910,13 +1238,44 @@ matriz* Gestion::generarImagen(img* imagen){
     return  result;
 }
 
+matriz* Gestion::generarImagen(matriz* capa1,matriz* capa0){
 
 
+    if(capa0&&capa1){
+
+        int fila =0;
+        int col = 0;
+        std::string color ="";
+
+        NodoCabeceraFila* actualFila = capa1->filaC->first;
+        while (actualFila) {
+            NodoOrtogonal* actualCol =actualFila->listHorizontal->first;
+            while (actualCol) {
+
+                fila =actualCol->getFila();
+                col = actualCol->getCol();
+                color = actualCol->getColor();
+                capa0->add(fila,col,color);
+
+                actualCol = actualCol->getRight();
+            }
+
+            actualFila= actualFila->getDown();
+        }
 
 
+    }else{
 
-
-
+        if(capa0){
+            return  capa0;
+        }else if(capa1){
+            return capa1;
+        }else {
+            return nullptr;
+        }
+    }
+    return capa0;
+}
 
 
 

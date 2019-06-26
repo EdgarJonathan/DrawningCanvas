@@ -48,6 +48,9 @@ private:
     NodoBst* buscar(int id , NodoBst* raiz);
     void graficarPreorden();
     void graficarPreorden(NodoBst* raiz);
+    void graficarPreordenEspejo();
+    void graficarPreordenEspejo(NodoBst* raiz);
+    void textoDotEspejo(std::string nombre);
     void textoDot(std::string nombre);
     void add(int id, matriz* capa, NodoBst *&temp );
 public:
@@ -58,6 +61,7 @@ public:
     void add(int id , matriz * capa);
     NodoBst* buscar(int id);
     std::string obtenerdotGrafica();
+    void  graficarEspejo();
     void graficar();
 
 };

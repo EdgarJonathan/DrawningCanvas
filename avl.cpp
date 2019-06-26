@@ -5,12 +5,12 @@
 //********************************************************************************
 //********************************************************************************
 //********************************************************************************
-listImg *NodoAvl::getListaImagen() const
+ListImgUser *NodoAvl::getListaImagen() const
 {
     return listaImagen;
 }
 
-void NodoAvl::setListaImagen(listImg *value)
+void NodoAvl::setListaImagen(ListImgUser *value)
 {
     listaImagen = value;
 }
@@ -55,7 +55,7 @@ void NodoAvl::setFe(int value)
     fe = value;
 }
 
-NodoAvl::NodoAvl(listImg* listaImagen,std::string nombre){
+NodoAvl::NodoAvl(ListImgUser* listaImagen,std::string nombre){
 
     this->listaImagen = listaImagen;
     this->nombre = nombre;
@@ -63,7 +63,7 @@ NodoAvl::NodoAvl(listImg* listaImagen,std::string nombre){
     fe=0;
 
 }
-NodoAvl::NodoAvl(listImg* listaImagen,std::string nombre,int fe){
+NodoAvl::NodoAvl(ListImgUser* listaImagen,std::string nombre,int fe){
 
     this->listaImagen = listaImagen;
     this->nombre = nombre;
@@ -72,7 +72,7 @@ NodoAvl::NodoAvl(listImg* listaImagen,std::string nombre,int fe){
 
 
 }
-NodoAvl::NodoAvl(NodoAvl* izq,listImg* listaImagen,std::string nombre,NodoAvl* der){
+NodoAvl::NodoAvl(NodoAvl* izq,ListImgUser* listaImagen,std::string nombre,NodoAvl* der){
 
     this->listaImagen = listaImagen;
     this->nombre = nombre;
@@ -81,7 +81,7 @@ NodoAvl::NodoAvl(NodoAvl* izq,listImg* listaImagen,std::string nombre,NodoAvl* d
     this->fe=0;
 
 }
-NodoAvl::NodoAvl(NodoAvl* izq,int fe,listImg* listaImagen,std::string nombre, NodoAvl* der){
+NodoAvl::NodoAvl(NodoAvl* izq,int fe,ListImgUser* listaImagen,std::string nombre, NodoAvl* der){
     this->listaImagen = listaImagen;
     this->nombre = nombre;
     this->izq=izq;
@@ -199,7 +199,7 @@ NodoAvl* Avl::rdid(NodoAvl*n,NodoAvl*n1){
 }
 
 
-void Avl::insertarAvl(listImg* listaImagen,std::string nombre){
+void Avl::insertarAvl(ListImgUser* listaImagen,std::string nombre){
 
     bool hc = false;
 
@@ -208,7 +208,7 @@ void Avl::insertarAvl(listImg* listaImagen,std::string nombre){
 }
 
 
-NodoAvl* Avl::insertarAvl(NodoAvl* raiz, listImg* listaImagen,std::string nombre, bool &hc){
+NodoAvl* Avl::insertarAvl(NodoAvl* raiz, ListImgUser* listaImagen,std::string nombre, bool &hc){
 
     NodoAvl *n1;
     if (raiz == nullptr)

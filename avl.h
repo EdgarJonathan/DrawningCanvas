@@ -13,20 +13,20 @@
 class NodoAvl
 {
 protected:
-    listImg* listaImagen;
+    ListImgUser* listaImagen;
     std::string nombre;
     NodoAvl* izq;
     NodoAvl* der;
     int fe;
 public:
-    NodoAvl(listImg* listaImagen,std::string nombre);
-    NodoAvl(listImg* listaImagen,std::string nombre,int fe);
-    NodoAvl(NodoAvl* izq,listImg* listaImagen,std::string nombre,NodoAvl* der);
-    NodoAvl(NodoAvl* izq,int fe,listImg* listaImagen,std::string nombre, NodoAvl* der);
+    NodoAvl(ListImgUser *listaImagen, std::string nombre);
+    NodoAvl(ListImgUser *listaImagen, std::string nombre, int fe);
+    NodoAvl(NodoAvl* izq,ListImgUser* listaImagen,std::string nombre,NodoAvl* der);
+    NodoAvl(NodoAvl* izq,int fe,ListImgUser* listaImagen,std::string nombre, NodoAvl* der);
 
     //operaciones de acceso
-    listImg *getListaImagen() const;
-    void setListaImagen(listImg *value);
+    ListImgUser *getListaImagen() const;
+    void setListaImagen(ListImgUser *value);
     std::string getNombre() const;
     void setNombre(const std::string &value);
     NodoAvl *getIzq() const;
@@ -64,7 +64,7 @@ private:
     NodoAvl* rdid(NodoAvl*n,NodoAvl*n1);
 
 
-    NodoAvl* insertarAvl(NodoAvl* raiz, listImg* listaImagen,std::string nombre, bool &hc);
+    NodoAvl* insertarAvl(NodoAvl* raiz, ListImgUser *listaImagen, std::string nombre, bool &hc);
     void inorden(NodoAvl* temp);
     void postOrden(NodoAvl* temp);
     void preOrden(NodoAvl* temp);
@@ -78,7 +78,7 @@ public:
     Avl(NodoAvl* r);
     NodoAvl *getRaiz() const;
     void setRaiz(NodoAvl *value);
-    void insertarAvl(listImg* listaImagen,std::string nombre);
+    void insertarAvl(ListImgUser* listaImagen,std::string nombre);
 
     void mostrar(int tipo);
 
